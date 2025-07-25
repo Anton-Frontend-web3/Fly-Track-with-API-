@@ -11,20 +11,25 @@ export function Favorites() {
 	}, [favorites])
 
 	return (
-		<div className='text-3xl text-white/80'>
+		<div className='flex h-full flex-col text-3xl text-white/80'>
 			<span>Favorites</span>
-			<p className='text-white/80 text-lg'>You have {favoritesFlights.length} saved flight{favoritesFlights.length !== 1 ? 's' : ''}.</p>
-			<div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
-				{favoritesFlights.length > 0 ? (
-					favoritesFlights.map(flight => (
-						<FlightCard
-							flight={flight}
-							key={flight.aircraftReg}
-						/>
-					))
-				) : (
-					<p className='text-white/60'>You have no favorite flights yet.</p>
-				)}
+			<p className='text-lg text-white/80'>
+				You have {favoritesFlights.length} saved flight
+				{favoritesFlights.length !== 1 ? 's' : ''}.
+			</p>
+			<div className='scrollbar-hide flex-1 overflow-y-auto'>
+				<div className='xs:grid-cols-1 grid grid-cols-3 gap-3 sm:grid-cols-2'>
+					{favoritesFlights.length > 0 ? (
+						favoritesFlights.map(flight => (
+							<FlightCard
+								flight={flight}
+								key={flight.aircraftReg}
+							/>
+						))
+					) : (
+						<p className='text-white/60'>You have no favorite flights yet.</p>
+					)}
+				</div>
 			</div>
 		</div>
 	)

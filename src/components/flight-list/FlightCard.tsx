@@ -19,13 +19,13 @@ export function FlightCard({ flight }: Props) {
 	return (
 		<div
 			className={cn(
-				'w-full rounded-3xl p-0.5 transition-colors ease-in animate-slideLeft',
+				'w-full cursor-pointer rounded-3xl p-0.5 transition-colors ease-in animate-slideLeft',
 				isActive
 					? 'bg-gradient-to-r from-rose-500 to-orange-400'
 					: 'bg-transparent'
 			)}
 		>
-			<button
+			<div
 				onClick={() => {
 					setSearchParams({
 						[QUERY_PARAM_FLIGHT]: flight.aircraftReg
@@ -70,7 +70,7 @@ export function FlightCard({ flight }: Props) {
 						<div className='text-5xl font-medium'>{flight.to.code}</div>
 					</div>
 				</div>
-			</button>
+			</div>
 		</div>
 	)
 }

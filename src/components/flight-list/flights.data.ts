@@ -1,5 +1,16 @@
 import type { IFlight } from '../../types/flight.types'
 
+const getCurrentCoordinates = (
+	from: [number, number],
+	to: [number, number],
+	progressPercent: number
+): [number, number] => {
+	const ratio = progressPercent / 100
+	const lat = from[0] + (to[0] - from[0]) * ratio
+	const lng = from[1] + (to[1] - from[1]) * ratio
+	return [lat, lng]
+}
+
 export const FLIGHTS: IFlight[] = [
 	{
 		logo: '/logos-airlines/turkish.svg',
@@ -11,14 +22,16 @@ export const FLIGHTS: IFlight[] = [
 			country: 'Bulgaria',
 			countryCode: 'BG',
 			timezone: 'UTC +3',
-			code: 'SOF'
+			code: 'SOF',
+			coordinates: [42.6977, 23.3219]
 		},
 		to: {
 			city: 'Beijing',
 			country: 'China',
 			countryCode: 'CN',
 			timezone: 'UTC +8',
-			code: 'PEK'
+			code: 'PEK',
+			coordinates: [39.9042, 116.4074]
 		},
 		airplane: {
 			image: '/aircrafts/01_turkish_airbus-A330.png',
@@ -29,7 +42,14 @@ export const FLIGHTS: IFlight[] = [
 			speed: 870,
 			altitude: 10600
 		},
-		progress: 75
+		progress: 75,
+		currentLocation: {
+			coordinates: getCurrentCoordinates(
+				[42.6977, 23.3219],
+				[39.9042, 116.4074],
+				75
+			)
+		}
 	},
 	{
 		logo: '/logos-airlines/ryanair.svg',
@@ -41,14 +61,16 @@ export const FLIGHTS: IFlight[] = [
 			country: 'Ireland',
 			countryCode: 'IE',
 			timezone: 'UTC +1',
-			code: 'DUB'
+			code: 'DUB',
+			coordinates: [53.3498, -6.2603]
 		},
 		to: {
 			city: 'Larnaca',
 			country: 'Cyprus',
 			countryCode: 'CY',
 			timezone: 'UTC +3',
-			code: 'LCA'
+			code: 'LCA',
+			coordinates: [34.9167, 33.6233]
 		},
 		airplane: {
 			image: '/aircrafts/02_Ryanair_Boeing-737-800.png',
@@ -59,7 +81,14 @@ export const FLIGHTS: IFlight[] = [
 			speed: 840,
 			altitude: 11200
 		},
-		progress: 50
+		progress: 50,
+		currentLocation: {
+			coordinates: getCurrentCoordinates(
+				[53.3498, -6.2603],
+				[34.9167, 33.6233],
+				50
+			)
+		}
 	},
 	{
 		logo: '/logos-airlines/s7.svg',
@@ -71,14 +100,16 @@ export const FLIGHTS: IFlight[] = [
 			country: 'France',
 			countryCode: 'FR',
 			timezone: 'UTC +2',
-			code: 'NCE'
+			code: 'NCE',
+			coordinates: [43.7102, 7.262]
 		},
 		to: {
 			city: 'Tbilisi',
 			country: 'Georgia',
 			countryCode: 'GE',
 			timezone: 'UTC +4',
-			code: 'TBS'
+			code: 'TBS',
+			coordinates: [41.7151, 44.8271]
 		},
 		airplane: {
 			image: '/aircrafts/03_s7_Airbus-A320.png',
@@ -89,7 +120,14 @@ export const FLIGHTS: IFlight[] = [
 			speed: 860,
 			altitude: 10900
 		},
-		progress: 70
+		progress: 70,
+		currentLocation: {
+			coordinates: getCurrentCoordinates(
+				[43.7102, 7.262],
+				[41.7151, 44.8271],
+				70
+			)
+		}
 	},
 	{
 		logo: '/logos-airlines/swiss.svg',
@@ -101,14 +139,16 @@ export const FLIGHTS: IFlight[] = [
 			country: 'Portugal',
 			countryCode: 'PT',
 			timezone: 'UTC +1',
-			code: 'OPO'
+			code: 'OPO',
+			coordinates: [41.1579, -8.6291]
 		},
 		to: {
 			city: 'Baku',
 			country: 'Azerbaijan',
 			countryCode: 'AZ',
 			timezone: 'UTC +4',
-			code: 'GYD'
+			code: 'GYD',
+			coordinates: [40.4093, 49.8671]
 		},
 		airplane: {
 			image: '/aircrafts/04_SWISS_Airbus-A321.png',
@@ -119,7 +159,14 @@ export const FLIGHTS: IFlight[] = [
 			speed: 830,
 			altitude: 10700
 		},
-		progress: 85
+		progress: 85,
+		currentLocation: {
+			coordinates: getCurrentCoordinates(
+				[41.1579, -8.6291],
+				[40.4093, 49.8671],
+				85
+			)
+		}
 	},
 	{
 		logo: '/logos-airlines/lufthansa.svg',
@@ -131,14 +178,16 @@ export const FLIGHTS: IFlight[] = [
 			country: 'Bulgaria',
 			countryCode: 'BG',
 			timezone: 'UTC +3',
-			code: 'BOJ'
+			code: 'BOJ',
+			coordinates: [42.5048, 27.4716]
 		},
 		to: {
 			city: 'Muscat',
 			country: 'Oman',
 			countryCode: 'OM',
 			timezone: 'UTC +4',
-			code: 'MCT'
+			code: 'MCT',
+			coordinates: [23.588, 58.3829]
 		},
 		airplane: {
 			image: '/aircrafts/05_Lufthansa_Airbus-A350-900.png',
@@ -149,6 +198,13 @@ export const FLIGHTS: IFlight[] = [
 			speed: 890,
 			altitude: 11300
 		},
-		progress: 48
+		progress: 48,
+		currentLocation: {
+			coordinates: getCurrentCoordinates(
+				[42.5048, 27.4716],
+				[23.588, 58.3829],
+				48
+			)
+		}
 	}
 ]

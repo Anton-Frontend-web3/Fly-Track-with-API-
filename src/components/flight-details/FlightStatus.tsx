@@ -5,7 +5,7 @@ interface Props {
 
 export function FlightStatus({ progress }: Props) {
 	return (
-		<div className='bg-background flex h-24 w-full flex-col justify-center rounded-3xl p-4'>
+		<section className='bg-background flex h-24 w-full flex-col justify-center rounded-3xl p-4'>
 			<FlightProgress progress={progress}></FlightProgress>
 
 			<div className='flex justify-between text-sm opacity-50 pt-6'>
@@ -20,6 +20,6 @@ export function FlightStatus({ progress }: Props) {
 					<span>59m</span>
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }

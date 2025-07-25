@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import './styles/fonts.css';
-
+@import 'tailwind-scrollbar-hide/v4';
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
@@ -40,7 +40,7 @@
 }
 
 html {
-	@apply text-base md:text-[0.92rem];
+	@apply text-base md:text-[0.92rem] overflow-hidden;
 }
 
 @theme {

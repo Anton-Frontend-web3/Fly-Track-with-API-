@@ -7,6 +7,7 @@ import { FLIGHTS } from './flights.data'
 export function FlightList() {
 	const [isLoading, setLoading] = useState(true)
 	const [fromCountry, setCountry] = useState<string | null>(null)
+	const [toCountry, setToCountry] = useState<string | null>(null)
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -18,17 +19,24 @@ export function FlightList() {
 	}, [])
 
 	const filterFlights = useMemo(() => {
-		if (!fromCountry) return FLIGHTS
-		return FLIGHTS.filter(flight => flight.from.country === fromCountry)
-	}, [fromCountry])
+		return FLIGHTS.filter(flight => {
+			if (toCountry && flight.to.country !== toCountry) return false
+			if (fromCountry && flight.from.country !== fromCountry) return false
+			return true
+		})
+	}, [fromCountry, toCountry])
 
 	return (
-		<div className='w-120 xs:w-full md:w-xs'>
+		//
+
+		<div className='xs:w-full relative z-10 flex h-full w-120 flex-col md:w-xs lg:w-sm'>
 			<FlightFilter
 				fromCountry={fromCountry}
 				setCountry={setCountry}
+				toCountry={toCountry}
+				setToCountry={setToCountry}
 			></FlightFilter>
-			<div className='flex flex-col gap-4 pt-3 '>
+			<div className='scrollbar-hide flex flex-1 flex-col gap-4 overflow-y-auto pt-3'>
 				{isLoading ? (
 					<SkeletonLoader
 						className={'h-40'}

@@ -4,6 +4,7 @@ export interface IFlightLocation {
 	countryCode: string
 	timezone: string
 	code: string
+	coordinates: [number, number]
 }
 
 export interface IFlightAirplane {
@@ -27,4 +28,5 @@ export interface IFlight {
 	route: IFlightRoute
 	colorGradient: [string, string]
 	progress: number
+	currentLocation: Pick<IFlightLocation, 'coordinates'>
 }
