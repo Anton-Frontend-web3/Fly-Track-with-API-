@@ -43,13 +43,13 @@ export function FilterSearchSelect({
 					variant='outline'
 					role='combobox'
 					aria-expanded={isOpen}
-					className='w-[190px] sm:w-[145px] justify-between gap-1'
+					className='w-[190px] sm:w-[145px] md:w-[145px] justify-between gap-1'
 				>
 					{value ? data.find(item => item === value) : `Select ${entityTitle}...`}
 					<ChevronsUpDown className='opacity-50 h-4 w-4' />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className='w-[190px] sm:w-[145px] p-0'>
+			<PopoverContent className='w-[190px] sm:w-[145px] md:w-[145px] p-0'>
 				<Command>
 					<CommandInput
 						placeholder={`Search ${entityTitle}...`}

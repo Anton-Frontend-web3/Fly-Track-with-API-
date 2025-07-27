@@ -16,7 +16,7 @@ export function FlightInformation({ flight }: PropsFlight) {
 
 				<div className='bg-background flex items-center gap-2 p-3 hover:bg-[var(--background-hover)] active:bg-[var(--background-active)] '>
 					<img
-						src={`/flags/${flight.airlineCountry.toLowerCase()}-flag.svg`}
+						src={`flags/${flight.airlineCountry.toLowerCase()}-flag.svg`}
 						alt={flight.airlineCountry}
 						width={20}
 						height={15}

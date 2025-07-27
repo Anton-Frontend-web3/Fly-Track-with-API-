@@ -13,7 +13,7 @@ const getCurrentCoordinates = (
 
 export const FLIGHTS: IFlight[] = [
 	{
-		logo: '/logos-airlines/turkish.svg',
+		logo: 'logos-airlines/turkish.svg',
 		airline: 'TK143',
 		aircraftReg: 'TC-JFP',
 		airlineCountry: 'Turkey',
@@ -34,7 +34,7 @@ export const FLIGHTS: IFlight[] = [
 			coordinates: [39.9042, 116.4074]
 		},
 		airplane: {
-			image: '/aircrafts/01_turkish_airbus-A330.png',
+			image: 'aircrafts/01_turkish_airbus-A330.png',
 			name: 'Airbus A330'
 		},
 		colorGradient: ['#ffdede', '#ffbaba'],
@@ -52,7 +52,7 @@ export const FLIGHTS: IFlight[] = [
 		}
 	},
 	{
-		logo: '/logos-airlines/ryanair.svg',
+		logo: 'logos-airlines/ryanair.svg',
 		airline: 'RN1782',
 		airlineCountry: 'Ireland',
 		aircraftReg: 'D-AISP',
@@ -73,7 +73,7 @@ export const FLIGHTS: IFlight[] = [
 			coordinates: [34.9167, 33.6233]
 		},
 		airplane: {
-			image: '/aircrafts/02_Ryanair_Boeing-737-800.png',
+			image: 'aircrafts/02_Ryanair_Boeing-737-800.png',
 			name: 'Boeing 737-800'
 		},
 		colorGradient: ['#A1C6E1', '#88B5E0'],
@@ -91,7 +91,7 @@ export const FLIGHTS: IFlight[] = [
 		}
 	},
 	{
-		logo: '/logos-airlines/s7.svg',
+		logo: 'logos-airlines/s7.svg',
 		airline: 'S7124',
 		aircraftReg: 'RA-73415',
 		airlineCountry: 'Russia',
@@ -112,7 +112,7 @@ export const FLIGHTS: IFlight[] = [
 			coordinates: [41.7151, 44.8271]
 		},
 		airplane: {
-			image: '/aircrafts/03_s7_Airbus-A320.png',
+			image: 'aircrafts/03_s7_Airbus-A320.png',
 			name: 'Airbus A320neo'
 		},
 		colorGradient: ['#d6ffe5', '#96f2c1'],
@@ -130,7 +130,7 @@ export const FLIGHTS: IFlight[] = [
 		}
 	},
 	{
-		logo: '/logos-airlines/swiss.svg',
+		logo: 'logos-airlines/swiss.svg',
 		airline: 'LX318',
 		aircraftReg: 'HB-JHK',
 		airlineCountry: 'Switzerland',
@@ -151,7 +151,7 @@ export const FLIGHTS: IFlight[] = [
 			coordinates: [40.4093, 49.8671]
 		},
 		airplane: {
-			image: '/aircrafts/04_SWISS_Airbus-A321.png',
+			image: 'aircrafts/04_SWISS_Airbus-A321.png',
 			name: 'Airbus A220-300'
 		},
 		colorGradient: ['#e6e6ff', '#a8b4ff'],
@@ -169,7 +169,7 @@ export const FLIGHTS: IFlight[] = [
 		}
 	},
 	{
-		logo: '/logos-airlines/lufthansa.svg',
+		logo: 'logos-airlines/lufthansa.svg',
 		airline: 'LH401',
 		aircraftReg: 'D-AIXD',
 		airlineCountry: 'Germany',
@@ -190,7 +190,7 @@ export const FLIGHTS: IFlight[] = [
 			coordinates: [23.588, 58.3829]
 		},
 		airplane: {
-			image: '/aircrafts/05_Lufthansa_Airbus-A350-900.png',
+			image: 'aircrafts/05_Lufthansa_Airbus-A350-900.png',
 			name: 'Airbus A350-900'
 		},
 		colorGradient: ['#e5f2ff', '#9dd2f9'],

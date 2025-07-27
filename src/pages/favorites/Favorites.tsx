@@ -11,7 +11,7 @@ export function Favorites() {
 	}, [favorites])
 
 	return (
-		<div className='flex h-full flex-col text-3xl text-white/80'>
+		<div className=' flex h-full flex-col text-3xl text-white/80'>
 			<span>Favorites</span>
 			<p className='text-lg text-white/80'>
 				You have {favoritesFlights.length} saved flight

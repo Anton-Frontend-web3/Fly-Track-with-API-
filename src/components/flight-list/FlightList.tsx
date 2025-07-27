@@ -29,7 +29,7 @@ export function FlightList() {
 	return (
 		//
 
-		<div className='xs:w-full relative z-10 flex h-full w-120 flex-col md:w-xs lg:w-sm'>
+		<div className='xs:w-full xs:p-2.5 px-7 sm:px-3 mb-7  absolute z-10 top-7 left-0 bottom-7 flex  w-120 flex-col xl:top-25 md:w-xs lg:w-sm'>
 			<FlightFilter
 				fromCountry={fromCountry}
 				setCountry={setCountry}

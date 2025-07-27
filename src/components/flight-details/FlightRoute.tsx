@@ -12,7 +12,7 @@ export function FlightRoute({ flight }: Props) {
 				<span className='font-normal'>{flight.from.timezone}</span>
 			</div>
 			<div className='bg-secondary text-accent absolute top-1/2 aspect-square -translate-y-1/2 rounded-full p-2'>
-				<img src="/icons/AirplaneUp.svg" alt="AirplaneUp Icon" />
+				<img src="icons/AirplaneUp.svg" alt="AirplaneUp Icon" />
 			</div>
 			
 			<div className='bg-background flex flex-1 flex-col items-center justify-stretch text-center hover:bg-[var(--background-hover)] active:bg-[var(--background-active)]'>

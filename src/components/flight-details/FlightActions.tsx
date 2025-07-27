@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom'
 const actions = [
 	{
 		label: 'Route',
-		icon: '/actions-icons/Route.svg',
+		icon: 'actions-icons/Route.svg',
 		to: '/Follow'
 	},
 	{
 		label: 'Follow',
-		icon: '/actions-icons/Follow.svg',
+		icon: 'actions-icons/Follow.svg',
 		to: '/Follow'
 	},
 
 	{
 		label: 'Share',
-		icon: '/actions-icons/Vector.svg',
+		icon: 'actions-icons/Vector.svg',
 		to: '/Share'
 	},
 	{
 		label: 'More',
-		icon: '/actions-icons/More.svg',
+		icon: 'actions-icons/More.svg',
 		to: '/More'
 	}
 ]

@@ -14,7 +14,7 @@ import { store } from './store/store.ts'
 
 const queryClient = new QueryClient()
 createRoot(document.getElementById('root')!).render(
-	<BrowserRouter>
+	<BrowserRouter basename='/Sky-Track-Demo/'>
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider>
 				<LazyMotion features={domAnimation}>
