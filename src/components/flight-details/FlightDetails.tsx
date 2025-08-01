@@ -18,7 +18,7 @@ export function FlightDetails() {
 	return (
 		<AnimatePresence mode='wait'>
 			<m.aside
-				key={flight.aircraftReg}
+				key={flight.id}
 				initial={{ x: '100%', opacity: 0 }}
 				animate={{ x: 0, opacity: 1 }}
 				exit={{ x: '100%', opacity: 0 }}

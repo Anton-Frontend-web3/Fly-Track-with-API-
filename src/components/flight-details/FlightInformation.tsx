@@ -16,22 +16,22 @@ export function FlightInformation({ flight }: PropsFlight) {
 
 				<div className='bg-background flex items-center gap-2 p-3 hover:bg-[var(--background-hover)] active:bg-[var(--background-active)] '>
 					<img
-						src={`flags/${flight.airlineCountry.toLowerCase()}-flag.svg`}
-						alt={flight.airlineCountry}
+						src={`flags/${flight.company.toLowerCase()}-flag.svg`}
+						alt={flight.company}
 						width={20}
 						height={15}
 					/>
-					<span>{flight.airlineCountry}</span>
+					<span>{flight.company}</span>
 				</div>
 
 				<div className='bg-background flex items-baseline gap-2 p-3 hover:bg-[var(--background-hover)] active:bg-[var(--background-active)]'>
 					<span>Speed</span>
-					<span>{flight.route.speed} km/h</span>
+					<span>{flight?.route?.speed} km/h</span>
 				</div>
 
 				<div className='bg-background flex items-baseline gap-2 p-3 hover:bg-[var(--background-hover)] active:bg-[var(--background-active)]'>
 					<span>Altitude</span>
-					<span>{flight.route.altitude} m</span>
+					<span>{flight?.route?.altitude} m</span>
 				</div>
 			</div>
 		</section>

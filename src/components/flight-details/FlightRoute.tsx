@@ -1,4 +1,4 @@
-import type { IFlight } from '../../types/flight.types'
+import type { IFlight } from '@/services/aviation.types'
 
 interface Props {
 	flight: IFlight

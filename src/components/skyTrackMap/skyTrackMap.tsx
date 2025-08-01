@@ -1,46 +1,65 @@
+// src/components/sky-track-map/SkyTrackMap.tsx
+
 import { useCurrentFlight } from '@/hooks/useCurrentFlight'
 import { useTheme } from '@/provider/useTheme'
 import { MapPin, Plane, PlaneTakeoff } from 'lucide-react'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { useEffect, useMemo, useRef } from 'react'
 import Map, { Layer, Marker, Source, type MapRef } from 'react-map-gl/maplibre'
-import { FLIGHTS } from '../flight-list/flights.data'
+// ВАЖНО: Мы больше не будем использовать статический массив FLIGHTS, так как он вызывает ошибки
+// import { FLIGHTS } from '../flight-list/flights.data' 
 import {
 	createSplitGreatCircle,
 	dashedStyle,
 	solidStyle
 } from './sky-track-map.utils'
+import type { IFlight } from '@/types/flight.types'
+
+// Функция для вычисления текущего местоположения на основе прогресса
+const getIntermediatePoint = (from: [number, number], to: [number, number], progress: number): [number, number] => {
+    const factor = progress / 100;
+    const lat = from[0] + (to[0] - from[0]) * factor;
+    const lon = from[1] + (to[1] - from[1]) * factor;
+    return [lat, lon];
+}
+
 
 export function SkyTrackMap() {
-	const { flight } = useCurrentFlight()
+	const { flight, isLoading } = useCurrentFlight()
 
-	const currentOtherFlightsCoordinate = useMemo(
-		() =>
-			FLIGHTS.filter(f => f.aircraftReg != flight?.aircraftReg).map(
-				f => f.currentLocation.coordinates
-			),
-		[flight]
-	)
+    // ИСПРАВЛЕНО: Вычисляем currentLocation на основе данных из API
+    const currentLocation = useMemo(() => {
+        if (!flight) return null;
+        return getIntermediatePoint(flight.from.coordinates, flight.to.coordinates, flight.progress);
+    }, [flight]);
+
+	// УДАЛЕНО: Этот блок кода использовал статические данные и вызывал ошибку.
+	// Отображение других самолетов - это отдельная, более сложная задача.
+	// const currentOtherFlightsCoordinate = useMemo(...)
 
 	const ref = useRef<MapRef>(null)
-	useEffect(() => {
-		if (ref.current && flight) {
-			;(ref.current.setCenter({
-				lat: flight?.currentLocation.coordinates[0],
-				lng: flight?.currentLocation.coordinates[1]
-			}),
-				ref.current.setZoom(6))
+	
+    // ИСПРАВЛЕНО: Этот хук теперь использует наше вычисленное currentLocation
+    useEffect(() => {
+		if (ref.current && flight && currentLocation) {
+			ref.current.setCenter({
+				lat: currentLocation[0],
+				lng: currentLocation[1]
+			});
+			ref.current.setZoom(6);
 		}
-	}, [flight])
+	}, [flight, currentLocation]) // Добавляем currentLocation в зависимости
 
 	const { solidFeature, dashedFeature, snappedPoint, bearing } = useMemo(() => {
-		if (!flight?.from || !flight?.to || !flight?.currentLocation)
+        // ИСПРАВЛЕНО: Проверяем наличие currentLocation
+		if (!flight?.from || !flight?.to || !currentLocation) {
 			return {
 				solidFeature: null,
 				dashedFeature: null,
 				snappedPoint: null,
 				bearing: 0
 			}
+        }
 
 		const from: [number, number] = [
 			flight.from.coordinates[1],
@@ -50,23 +69,35 @@ export function SkyTrackMap() {
 			flight.to.coordinates[1],
 			flight.to.coordinates[0]
 		]
+        // ИСПРАВЛЕНО: Используем вычисленное currentLocation, поменяв порядок для карты
 		const current: [number, number] = [
-			flight.currentLocation.coordinates[1],
-			flight.currentLocation.coordinates[0]
+			currentLocation[1],
+			currentLocation[0]
 		]
 
 		return createSplitGreatCircle(from, to, current)
-	}, [flight])
+	}, [flight, currentLocation]) // Добавляем currentLocation в зависимости
 
 	const { theme } = useTheme()
+
+    // Добавляем проверку на загрузку, чтобы карта не рендерилась без данных
+    if (isLoading) {
+        return <div>Loading Map...</div>;
+    }
+
+    if (!flight) {
+        // Можно показать пустую карту или сообщение
+        return <div>Select a flight to see the map</div>;
+    }
+
 
 	return (
 		<Map
 			ref={ref}
 			initialViewState={{
-				latitude: 37.8,
-				longitude: -122.4,
-				zoom: 6
+				latitude: flight.from.coordinates[0], // Начинаем с точки вылета
+				longitude: flight.from.coordinates[1],
+				zoom: 4
 			}}
 			style={{ width: '100%', height: '100vh' }}
 			mapStyle={
@@ -75,6 +106,7 @@ export function SkyTrackMap() {
 					: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
 			}
 		>
+			{/* Этот код ниже должен теперь работать, так как мы предоставляем ему все данные */}
 			{solidFeature && solidFeature.geometry.coordinates.length > 1 && (
 				<Source
 					id='route-solid'
@@ -116,11 +148,10 @@ export function SkyTrackMap() {
 					</div>
 				</Marker>
 			)}
-			{flight?.from.coordinates?.length &&
-				flight.from.coordinates.length > 1 && (
+			{flight.from.coordinates?.length > 1 && (
 					<Marker
-						latitude={flight?.from.coordinates[0]}
-						longitude={flight?.from.coordinates[1]}
+						latitude={flight.from.coordinates[0]}
+						longitude={flight.from.coordinates[1]}
 					>
 						<PlaneTakeoff
 							size={30}
@@ -128,10 +159,10 @@ export function SkyTrackMap() {
 						></PlaneTakeoff>
 					</Marker>
 				)}
-			{flight?.to.coordinates?.length && flight.to.coordinates.length > 1 && (
+			{flight.to.coordinates?.length > 1 && (
 				<Marker
-					latitude={flight?.to.coordinates[0]}
-					longitude={flight?.to.coordinates[1]}
+					latitude={flight.to.coordinates[0]}
+					longitude={flight.to.coordinates[1]}
 				>
 					<MapPin
 						size={30}
@@ -139,19 +170,6 @@ export function SkyTrackMap() {
 					></MapPin>
 				</Marker>
 			)}
-			{!!currentOtherFlightsCoordinate?.length &&
-				currentOtherFlightsCoordinate.map(coordinate => (
-					<Marker
-						key={coordinate.join(',')}
-						latitude={coordinate[0]}
-						longitude={coordinate[1]}
-					>
-						<Plane
-							size={30}
-							className='fill-white opacity-30'
-						></Plane>
-					</Marker>
-				))}
 		</Map>
 	)
 }

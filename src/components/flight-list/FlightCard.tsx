@@ -1,10 +1,11 @@
 import { useSearchParams } from 'react-router-dom'
-import type { IFlight } from '../../types/flight.types'
+import type { IFlight } from '@/services/aviation.types'
 import { cn } from '../../utils/cn'
 import { QUERY_PARAM_FLIGHT } from './flight.constants'
 
 import { FavoriteCardAction } from './actions/FavoriteCardAction'
 import { FlightProgress } from './FlightProgress'
+import { FLIGHTS } from './flights.data'
 
 interface Props {
 	flight: IFlight
@@ -28,7 +29,7 @@ export function FlightCard({ flight }: Props) {
 			<div
 				onClick={() => {
 					setSearchParams({
-						[QUERY_PARAM_FLIGHT]: flight.aircraftReg
+						[QUERY_PARAM_FLIGHT]: flight.id
 					})
 				}}
 				className={cn(
@@ -38,7 +39,7 @@ export function FlightCard({ flight }: Props) {
 				<div className='mb-5 flex items-center justify-between'>
 					<div className='flex items-center gap-5'>
 						<img
-							src={flight.logo}
+							src={FLIGHTS[1].logo}
 							alt={flight.airline}
 							width={50}
 							height={50}

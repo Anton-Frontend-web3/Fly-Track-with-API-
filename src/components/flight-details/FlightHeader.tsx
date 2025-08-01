@@ -1,14 +1,15 @@
 import { X } from '@/components/animate-ui/icons/x'
 import { cn } from '@/utils/cn'
 import { Link } from 'react-router-dom'
-import type { IFlight } from '../../types/flight.types'
+import type { IFlight } from '@/services/aviation.types'
+import { FLIGHTS } from '../flight-list/flights.data'
 export interface PropsFlight {
 	flight: IFlight
 }
 
 export function FlightHeader({ flight }: PropsFlight) {
 	const gradientStyle = {
-		backgroundImage: `linear-gradient(to right, ${flight.colorGradient[0]}, ${flight.colorGradient[1]})`
+		backgroundImage: `linear-gradient(to right, ${FLIGHTS[0].colorGradient[0]}, ${FLIGHTS[0].colorGradient[1]})`
 	}
 	return (
 		<section
@@ -34,7 +35,7 @@ export function FlightHeader({ flight }: PropsFlight) {
 			</div>
 			<div>
 				<img
-					src={flight.airplane.image}
+					src={FLIGHTS[1].airplane.image}
 					alt=''
 					width={480}
 					height={216}

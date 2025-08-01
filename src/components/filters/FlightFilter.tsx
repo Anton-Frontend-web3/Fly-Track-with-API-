@@ -19,7 +19,7 @@ export function FlightFilter({
 	setToCountry
 }: IFlightFilterProps) {
 	return (
-		<div className='grid grid-cols-2 gap-1 pl-5 sm:pl-0 xl:pl-0'>
+		<div className='grid grid-cols-2 gap-9 '>
 			<FilterSearchSelect
 				value={fromCountry}
 				onChange={setCountry}
