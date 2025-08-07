@@ -1,13 +1,13 @@
 // src/components/sky-track-map/SkyTrackMap.tsx
 
-import { useCurrentFlight } from '@/hooks/useCurrentFlight'
-import { useTheme } from '@/provider/useTheme'
 import AviationService from '@/services/aviantion.serves'
 import type { IFlight } from '@/services/aviation.types'
+import { useCurrentFlight } from '@/hooks/useCurrentFlight'
+import { useTheme } from '@/provider/useTheme'
 import { useQuery } from '@tanstack/react-query'
 import { MapPin, Plane, PlaneTakeoff } from 'lucide-react'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, type RefObject } from 'react'
 import Map, { Layer, Marker, Source, type MapRef } from 'react-map-gl/maplibre'
 
 import {
@@ -15,6 +15,7 @@ import {
 	dashedStyle,
 	solidStyle
 } from './sky-track-map.utils'
+
 
 const getIntermediatePoint = (
 	from: [number, number],
@@ -27,15 +28,16 @@ const getIntermediatePoint = (
 	return [lat, lon]
 }
 
-export interface SkyTrackMapActions {
-	onFollow: () => void
-	onAnimateRoute: () => void
+interface ISkyTrackMap{
+	mapRef:RefObject<MapRef|null>
 }
 
-export function SkyTrackMap() {
-	const { theme } = useTheme()
-	const ref = useRef<MapRef>(null)
 
+export function SkyTrackMap({mapRef}:ISkyTrackMap) {
+	const { theme } = useTheme()
+
+	
+	
 	const { data: allFlights = [], isLoading: isLoadingAllFlights } = useQuery<
 		IFlight[],
 		Error
@@ -44,11 +46,13 @@ export function SkyTrackMap() {
 		queryFn: () => AviationService.getFlights()
 	})
 
+	
 	const { flight: selectedFlight } = useCurrentFlight()
 
+	
 	const otherFlightsCoordinates = useMemo(() => {
 		return allFlights
-			.filter(flight => flight.id !== selectedFlight?.id)
+			.filter(flight => flight.id !== selectedFlight?.id) 
 			.map(flight =>
 				getIntermediatePoint(
 					flight.from.coordinates,
@@ -58,6 +62,7 @@ export function SkyTrackMap() {
 			)
 	}, [allFlights, selectedFlight])
 
+
 	const currentLocation = useMemo(() => {
 		if (!selectedFlight) return null
 		return getIntermediatePoint(
@@ -66,19 +71,6 @@ export function SkyTrackMap() {
 			selectedFlight.progress
 		)
 	}, [selectedFlight])
-
-	useEffect(() => {
-		if (ref.current && selectedFlight && currentLocation) {
-			ref.current.flyTo({
-				center: {
-					lat: currentLocation[0],
-					lng: currentLocation[1]
-				},
-				zoom: 6,
-				duration: 2000
-			})
-		}
-	}, [selectedFlight, currentLocation])
 
 	const { solidFeature, dashedFeature, snappedPoint, bearing } = useMemo(() => {
 		if (!selectedFlight?.from || !selectedFlight?.to || !currentLocation) {
@@ -101,19 +93,17 @@ export function SkyTrackMap() {
 		return createSplitGreatCircle(from, to, current)
 	}, [selectedFlight, currentLocation])
 
+
 	if (isLoadingAllFlights) {
-		return (
-			<div className='flex h-screen items-center justify-center bg-gray-200'>
-				Loading Map...
-			</div>
-		)
+		return <div className='flex items-center justify-center h-screen bg-gray-200'>Loading Map...</div>
 	}
 
 	return (
 		<Map
-			ref={ref}
+			ref={mapRef}
+			
 			initialViewState={{
-				latitude: 48.85,
+				latitude: 48.85, 
 				longitude: 15.25,
 				zoom: 3.5
 			}}
@@ -124,66 +114,35 @@ export function SkyTrackMap() {
 					: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
 			}
 		>
+		
+			
 			{selectedFlight ? (
 				<>
 					{solidFeature && solidFeature.geometry.coordinates.length > 1 && (
-						<Source
-							id='route-solid'
-							type='geojson'
-							data={solidFeature}
-						>
+						<Source id='route-solid' type='geojson' data={solidFeature}>
 							<Layer {...solidStyle(theme)}></Layer>
 						</Source>
 					)}
 					{dashedFeature && dashedFeature.geometry.coordinates.length > 1 && (
-						<Source
-							id='route-dashed'
-							type='geojson'
-							data={{ type: 'FeatureCollection', features: [dashedFeature] }}
-						>
+						<Source id='route-dashed' type='geojson' data={{ type: 'FeatureCollection', features: [dashedFeature] }}>
 							<Layer {...dashedStyle(theme)}></Layer>
 						</Source>
 					)}
 					{snappedPoint && (
-						<Marker
-							latitude={snappedPoint[1]}
-							longitude={snappedPoint[0]}
-						>
-							<div
-								style={{
-									transform: `rotate(${bearing - 45}deg)`,
-									transformOrigin: 'center',
-									transition: 'transform 0.3s ease'
-								}}
-							>
-								<Plane
-									size={26}
-									strokeWidth={0}
-									className='fill-foreground'
-								/>
+						<Marker latitude={snappedPoint[1]} longitude={snappedPoint[0]}>
+							<div style={{ transform: `rotate(${bearing - 45}deg)`, transformOrigin: 'center', transition: 'transform 0.3s ease' }}>
+								<Plane size={26} strokeWidth={0} className='fill-foreground' />
 							</div>
 						</Marker>
 					)}
 					{selectedFlight.from.coordinates?.length > 1 && (
-						<Marker
-							latitude={selectedFlight.from.coordinates[0]}
-							longitude={selectedFlight.from.coordinates[1]}
-						>
-							<PlaneTakeoff
-								size={30}
-								className=''
-							/>
+						<Marker latitude={selectedFlight.from.coordinates[0]} longitude={selectedFlight.from.coordinates[1]}>
+							<PlaneTakeoff size={30} className='' />
 						</Marker>
 					)}
 					{selectedFlight.to.coordinates?.length > 1 && (
-						<Marker
-							latitude={selectedFlight.to.coordinates[0]}
-							longitude={selectedFlight.to.coordinates[1]}
-						>
-							<MapPin
-								size={30}
-								className=''
-							/>
+						<Marker latitude={selectedFlight.to.coordinates[0]} longitude={selectedFlight.to.coordinates[1]}>
+							<MapPin size={30} className='' />
 						</Marker>
 					)}
 				</>
@@ -191,15 +150,11 @@ export function SkyTrackMap() {
 				<>
 					{otherFlightsCoordinates.map((coordinate, index) => (
 						<Marker
-							key={index}
+							key={index} 
 							latitude={coordinate[0]}
 							longitude={coordinate[1]}
 						>
-							<Plane
-								size={24}
-								className='fill-white/70 stroke-black/50'
-								strokeWidth={0.5}
-							/>
+							<Plane size={24} className='fill-white/70 stroke-black/50' strokeWidth={0.5} />
 						</Marker>
 					))}
 				</>
