@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/main/CompanyLogo.svg" alt="SkyTrack Logo" width="120" />
-  <h1>Sky-Track-Demo ✈️</h1>
+  <h1>Sky Track <img src="https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/refs/heads/main/CompanyLogo.svg" alt="SkyTrack Logo" width="120" /> </h1>
   <p><strong>Интерактивный сервис для отслеживания полетов в реальном времени на глобальной карте.</strong></p>
 </div>
 
@@ -18,7 +17,7 @@ Sky-Track — это не просто карта с самолетами. Эт�
 <img width="1600" height="771" alt="image" src="https://github.com/user-attachments/assets/1aa47b53-c559-4352-8f54-6f476ab550bf" />
 
 
-**Попробовать вживую:** 👉 [**https://anton-frontend-web3.github.io/Sky-Track-Demo/**](https://anton-frontend-web3.github.io/Sky-Track-Demo/)
+**Попробовать вживую:** 👉 [**https://anton-frontend-web3.github.io/Sky-Track-Demo/**](https://anton-frontend-web3.github.io/Sky-Track/)
 
 ---
 
