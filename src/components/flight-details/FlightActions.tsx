@@ -45,7 +45,7 @@ export function FlightActions() {
 				})
 				break
 			case 'Source Code':
-				window.open('https://github.com/Anton-Frontend-web3/Sky-Track-Demo', '_blank');
+				window.open('https://github.com/Anton-Frontend-web3/Sky-Track', '_blank');
 				break
 		}
 	}

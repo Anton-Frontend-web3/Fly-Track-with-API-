@@ -11,7 +11,7 @@
 		"format": "prettier --write .",
 		"lint:fix": "eslint . --fix",
 		"predeploy": "bun run build",
-		"deploy": "gh-pages -d dist --repo https://github.com/Anton-Frontend-web3/Sky-Track-Demo.git"
+		"deploy": "gh-pages -d dist --repo https://github.com/Anton-Frontend-web3/Sky-Track.git"
 	},
 	"dependencies": {
 		"@radix-ui/react-dialog": "^1.1.14",
