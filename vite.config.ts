@@ -6,7 +6,7 @@ import svgr from 'vite-plugin-svgr'
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [react(), tailwindcss(), svgr()],
-	base: '/Sky-Track-Demo/',
+	base: '/Sky-Track/',
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src')
