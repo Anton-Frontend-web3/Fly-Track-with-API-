@@ -1,11 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
 import type { IFlight } from '@/services/aviation.types'
+import { useSearchParams } from 'react-router-dom'
 import { cn } from '../../utils/cn'
 import { QUERY_PARAM_FLIGHT } from './flight.constants'
 
 import { FavoriteCardAction } from './actions/FavoriteCardAction'
 import { FlightProgress } from './FlightProgress'
-import { FLIGHTS } from './flights.data'
 
 interface Props {
 	flight: IFlight
@@ -20,7 +19,7 @@ export function FlightCard({ flight }: Props) {
 	return (
 		<div
 			className={cn(
-				'w-full cursor-pointer rounded-3xl p-0.5 transition-colors ease-in animate-slideLeft',
+				'animate-slideLeft w-full cursor-pointer rounded-3xl p-0.5 transition-colors ease-in',
 				isActive
 					? 'bg-gradient-to-r from-rose-500 to-orange-400'
 					: 'bg-transparent'
@@ -39,7 +38,7 @@ export function FlightCard({ flight }: Props) {
 				<div className='mb-5 flex items-center justify-between'>
 					<div className='flex items-center gap-5'>
 						<img
-							src={FLIGHTS[1].logo}
+							src={flight.companyLogo}
 							alt={flight.airline}
 							width={50}
 							height={50}

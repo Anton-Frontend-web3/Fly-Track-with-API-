@@ -37,8 +37,6 @@ export function FlightList() {
 	}, [flights, fromCountry, toCountry])
 
 	return (
-		//
-
 		<div className='xs:w-full xs:p-2.5 absolute top-7 bottom-7 left-0 z-10 mb-7 flex w-120 flex-col px-7 sm:px-3 md:w-xs lg:w-sm xl:top-25'>
 			<div className='flex gap-10'>
 				<FlightFilter

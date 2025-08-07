@@ -26,7 +26,7 @@
 	--secondary: oklch(94% 0 89.876);
 	--secondary-foreground: oklch(0.205 0 0);
 	--muted: #0d0e0e33;
-	--muted-foreground: #c9c9c9;
+	--muted-foreground: #464545;
 }
 
 @layer base {

@@ -7,16 +7,15 @@ export const useCurrentFlight = () => {
     const [searchParams] = useSearchParams();
     const selectedFlightId = searchParams.get(QUERY_PARAM_FLIGHT);
 
-    // ----> ДОБАВЬТЕ ЭТУ СТРОКУ ДЛЯ ДИАГНОСТИКИ <----
+    
     console.log('ID из URL:', selectedFlightId); 
 
-    const { data: flight, isLoading, isError } = useQuery<IFlight, Error>({
+    const { data: flight, isLoading, isError } = useQuery<IFlight | null, Error>({
         queryKey: ['flight', selectedFlightId],
         queryFn: () => AviationService.getFlight(selectedFlightId!),
         enabled: !!selectedFlightId, 
     });
 
-    // ----> И ЭТИ СТРОКИ ТОЖЕ <----
     console.log('Статус загрузки (isLoading):', isLoading);
     console.log('Есть ли ошибка (isError):', isError);
     console.log('Полученные данные (flight):', flight);

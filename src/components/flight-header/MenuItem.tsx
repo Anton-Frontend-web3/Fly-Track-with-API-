@@ -14,7 +14,7 @@ export function MenuItem({ item }: IMenuItemProps) {
 			to={item.to}
 			className={({ isActive }) =>
 				cn(
-					'flex items-center sm:text-base gap-1.5 rounded-lg p-2 transition-colors duration-300',
+					'flex items-center gap-1.5 rounded-lg p-2 transition-colors duration-300 sm:text-base',
 					isActive
 						? 'bg-secondary text-foreground shadow-inner'
 						: 'text-foreground hover:bg-secondary hover:text-foreground'

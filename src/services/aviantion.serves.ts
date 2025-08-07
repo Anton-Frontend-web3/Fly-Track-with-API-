@@ -1,23 +1,30 @@
+import type { IFlight } from './aviation.types'
+
+const API_URL =
+	'https://gist.githubusercontent.com/Anton-Frontend-web3/47c685017259ff1b2437361c48bbe9f7/raw/59f818892753520d7e09c715379b944c06f31e2e/db.json'
+
 class AviationService {
-    async getFlights() {
-      const response = await fetch(
-        `https://66fa4a0aafc569e13a9b101d.mockapi.io/api/items`
-      );
-      if (!response.ok) {
-        throw new Error(`Error fetching flights: ${response.statusText}`);
-      }
-      return response.json();
-    }
-  
-    async getFlight(id: string) {
-      const response = await fetch(
-        `https://66fa4a0aafc569e13a9b101d.mockapi.io/api/items/${id}`
-      );
-      if (!response.ok) {
-        throw new Error(`Error fetching flights: ${response.statusText}`);
-      }
-      return response.json();
-    }
-  }
-  
-  export default new AviationService();
+	async getFlights(): Promise<IFlight[]> {
+		const response = await fetch(API_URL)
+
+		if (!response.ok) {
+			throw new Error(`Error fetching flights: ${response.statusText}`)
+		}
+
+		return response.json()
+	}
+
+	async getFlight(id: string): Promise<IFlight | null> {
+		const allFlights = await this.getFlights()
+
+		const flight = allFlights.find(f => f.id === id)
+
+		if (!flight) {
+			return null
+		}
+
+		return flight
+	}
+}
+
+export default new AviationService()

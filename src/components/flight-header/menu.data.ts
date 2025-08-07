@@ -1,6 +1,6 @@
 import { Heart } from '@/components/animate-ui/icons/heart'
 import { UserRound } from '@/components/animate-ui/icons/user-round'
-import CompanyLogo from '@/images/CompanyLogo.svg?react'
+import { CompanyLogoIcon } from '@/components/icons/CompanyLogoIcon'
 import type { ComponentType } from 'react'
 
 interface IconProps {
@@ -17,7 +17,7 @@ export interface IHeaderMenu {
 export const menu: IHeaderMenu[] = [
 	{
 		label: 'Home',
-		icon: CompanyLogo,
+		icon: CompanyLogoIcon,
 		to: '/'
 	},
 	{

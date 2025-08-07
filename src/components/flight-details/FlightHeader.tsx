@@ -1,7 +1,7 @@
 import { X } from '@/components/animate-ui/icons/x'
+import type { IFlight } from '@/services/aviation.types'
 import { cn } from '@/utils/cn'
 import { Link } from 'react-router-dom'
-import type { IFlight } from '@/services/aviation.types'
 import { FLIGHTS } from '../flight-list/flights.data'
 export interface PropsFlight {
 	flight: IFlight
@@ -18,7 +18,7 @@ export function FlightHeader({ flight }: PropsFlight) {
 		>
 			<div className={cn('bg-secondary m-5 flex justify-between rounded-2xl')}>
 				<div className='space-y-2 p-5'>
-					<span className='text-2xl text-[#FBA316]'>{flight.aircraftReg}</span>
+					<span className='text-2xl text-[#FBA316]'>{flight.id}</span>
 					<p>{flight.airline}</p>
 				</div>
 				<Link
@@ -35,8 +35,8 @@ export function FlightHeader({ flight }: PropsFlight) {
 			</div>
 			<div>
 				<img
-					src={FLIGHTS[1].airplane.image}
-					alt=''
+					src={flight.airplane.image}
+					alt={flight.airplane.name}
 					width={480}
 					height={216}
 				/>
