@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Sky Track <img src="https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/refs/heads/main/CompanyLogo.svg" alt="SkyTrack Logo" width="120" /> </h1>
+  <h1>Sky Track <img src="https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/refs/heads/main/CompanyLogo.svg" alt="SkyTrack Logo" /> </h1>
   <p><strong>Интерактивный сервис для отслеживания полетов в реальном времени на глобальной карте.</strong></p>
 </div>
 
