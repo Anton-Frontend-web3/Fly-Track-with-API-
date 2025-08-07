@@ -11,10 +11,12 @@ Sky-Track — это не просто карта с самолетами. Эт�
 ## 🚀 Демо
 
 ### ✨ Светлая тема
-![Скриншот приложения в светлой теме](https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/main/light-theme-screenshot.png)
+<img width="1600" height="774" alt="image" src="https://github.com/user-attachments/assets/88197eb2-e302-41d6-ad64-e5443d9445d0" />
+
 
 ### 🌙 Темная тема
-![Скриншот приложения в темной теме](https://raw.githubusercontent.com/Anton-Frontend-web3/AssetsImage/main/dark-theme-screenshot.png)
+<img width="1600" height="771" alt="image" src="https://github.com/user-attachments/assets/1aa47b53-c559-4352-8f54-6f476ab550bf" />
+
 
 **Попробовать вживую:** 👉 [**https://anton-frontend-web3.github.io/Sky-Track-Demo/**](https://anton-frontend-web3.github.io/Sky-Track-Demo/)
 
